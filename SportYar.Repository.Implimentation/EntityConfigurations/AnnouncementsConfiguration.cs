@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SportYar.Repository.Implimentation.EntityConfigurations
 {
-    internal class AnnouncementsConfiguration : IEntityTypeConfiguration<Announcement>
+    internal class AnnouncementsConfiguration : BaseEntityConfiguration<Announcement>
     {
         public void Configure(EntityTypeBuilder<Announcement> builder)
         {

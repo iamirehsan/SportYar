@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SportYar.Infrastructure
+namespace SportYar.Infrastructure.Excels
 {
     public static class ExcelHeaders
     {
-        public static Dictionary<string,int> CityHeaders()
+        public static Dictionary<string, int> CityHeaders()
         {
             return new Dictionary<string, int>
             {
@@ -26,7 +26,7 @@ namespace SportYar.Infrastructure
         {
             return new Dictionary<string, int>
             {
-                { "Id",1 } , {"Name",2}  
+                { "Id",1 } , {"Name",2}
             };
         }
 

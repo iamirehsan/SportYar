@@ -1,23 +1,28 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SportYar.Domain.Entites;
-using SportYar.Infrastructure;
+using SportYar.Infrastructure.Excels;
 using SportYar.Repository.Implimentation;
 
 namespace SportYar
 {
     public static class WebHostExtension
     {
-        public static  WebApplication Seed(this WebApplication host)
+        public static WebApplication Seed(this WebApplication host, string baseDirectory)
         {
-            var baseDirectory = AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.IndexOf("bin\\"));
+
             using (var scope = host.Services.CreateScope())
             {
                 var serviceProvider = scope.ServiceProvider;
                 var databaseContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
                 databaseContext.Database.Migrate();
-                databaseContext.SeedDataFromExcel<City>(baseDirectory + "SportYar.Infrastructure\\Excels\\Cities.xlsx", ExcelHeaders.CityHeaders());
-                databaseContext.SeedDataFromExcel<Province>(baseDirectory + "SportYar.Infrastructure\\Excels\\Provinces.xlsx", ExcelHeaders.CityHeaders());
-                databaseContext.SeedDataFromExcel<Region>(baseDirectory + "SportYar.Infrastructure\\Excels\\Regions.xlsx", ExcelHeaders.CityHeaders());
+                if(!databaseContext.Set<Province>().Any())
+                    databaseContext.SeedDataFromExcel<Province>(baseDirectory + "Province.xlsx", ExcelHeaders.ProvinceHeaders());
+                if (!databaseContext.Set<City>().Any())
+                    databaseContext.SeedDataFromExcel<City>(baseDirectory + "City.xlsx", ExcelHeaders.CityHeaders());
+                if (!databaseContext.Set<Region>().Any())
+                    databaseContext.SeedDataFromExcel<Region>(baseDirectory + "Region.xlsx", ExcelHeaders.RegionHeaders());
+              
+                    databaseContext.SaveChanges();
             }
 
             return host;

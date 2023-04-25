@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SportYar.Repository.Implimentation.EntityConfigurations
 {
-    internal class RegionsConfiguration : IEntityTypeConfiguration<Region>
+    internal class RegionsConfiguration : BaseEntityConfiguration<Region>
     {
         public void Configure(EntityTypeBuilder<Region> builder)
         {

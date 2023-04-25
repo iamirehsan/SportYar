@@ -22,32 +22,37 @@ namespace SportYar.Repository.Implimentation
 
         public  void SeedDataFromExcel<T>(string filePath , Dictionary<string,int> ExcelHeader) where T : class
         {
-            using var package = new ExcelPackage(new FileInfo(filePath));
-            var worksheet = package.Workbook.Worksheets[typeof(T).Name];
-            var rows = worksheet.Dimension.Rows;
-
-            var entityType = typeof(T);
-            var properties = entityType.GetProperties()
-                .Where(p => p.CanWrite && !p.GetGetMethod().IsVirtual);
-
-            for (int row = 2; row <= rows; row++)
+            using (var package = new ExcelPackage(new FileInfo(filePath)))
             {
-                var entity = Activator.CreateInstance<T>();
+                var worksheet = package.Workbook.Worksheets.First();
+                var rows = worksheet.Dimension.Rows;
+                var entityType = typeof(T);
+                var properties = entityType.GetProperties()
+                    .Where(p => p.CanWrite && !p.GetGetMethod().IsVirtual);
+                var headerAndPropertiesIntersection = properties.Where(c=> ExcelHeader.Keys.Contains(c.Name));
 
-                foreach (var property in properties)
+                for (int row = 2; row <= rows; row++)
                 {
-                    var cellValue = worksheet.Cells[row, ExcelHeader[property.Name]].Value;
-                    if (cellValue != null)
+                    var entity = Activator.CreateInstance<T>();
+
+                    foreach (var property in headerAndPropertiesIntersection)
                     {
-                        var convertedValue = Convert.ChangeType(cellValue, property.PropertyType);
-                        property.SetValue(entity, convertedValue);
+                        var cellValue = worksheet.Cells[row, ExcelHeader[property.Name]].Value;
+                        if (cellValue != null)
+                        {
+                            var convertedValue = Convert.ChangeType(cellValue, property.PropertyType);
+                            property.SetValue(entity, convertedValue);
+                        }
                     }
+
+                    Set<T>().Add(entity);
                 }
 
-                Set<T>().Add(entity);
+                
             }
 
-              SaveChanges();
+           
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

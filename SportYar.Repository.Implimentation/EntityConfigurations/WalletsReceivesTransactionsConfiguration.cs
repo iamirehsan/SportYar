@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SportYar.Repository.Implimentation.EntityConfigurations
 {
-    internal class WalletsReceivesTransactionsConfiguration : IEntityTypeConfiguration<WalletsReceivesTransaction>
+    internal class WalletsReceivesTransactionsConfiguration : BaseEntityConfiguration<WalletsReceivesTransaction>
     {
         public void Configure(EntityTypeBuilder<WalletsReceivesTransaction> builder)
         {

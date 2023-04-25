@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SportYar.Repository.Implimentation.EntityConfigurations
 {
-    internal class RequestsConfigurations : IEntityTypeConfiguration<Request>
+    internal class RequestsConfigurations : BaseEntityConfiguration<Request>
     {
         public void Configure(EntityTypeBuilder<Request> builder)
         {

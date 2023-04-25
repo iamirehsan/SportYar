@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace SportYar.Repository.Implimentation.EntityConfigurations
 {
-    public class CitiesConfiguration : IEntityTypeConfiguration<City>
+    public class CitiesConfiguration : BaseEntityConfiguration<City>
     {
         public void Configure(EntityTypeBuilder<City> builder)
         {
-            builder.HasMany(o => o.Regions).WithOne(o => o.City).HasForeignKey(x => x.CityId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(o => o.Regions).WithOne(o => o.City).HasForeignKey(x => x.CityId).IsRequired(false);
         }
     }
 }

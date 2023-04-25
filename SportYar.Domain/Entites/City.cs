@@ -9,8 +9,8 @@ namespace SportYar.Domain.Entites
     public class City : BaseEntity
     {
         public virtual ICollection<Region> Regions { get; set; }
-        public string ProvinceId { get; set; }
-        public virtual Province Province { get; set; }
+        public string? ProvinceId { get; set; }
+        public virtual Province? Province { get; set; }
         public string Name { get; set; }
     }
 }

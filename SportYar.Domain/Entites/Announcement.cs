@@ -10,8 +10,8 @@ namespace SportYar.Domain.Entites
     public class Announcement : BaseEntity
     {
         public string UserId{ get; set; }
-        public string RegionId { get; set; }
-        public virtual Region Region { get; set; }
+        public string? RegionId { get; set; }
+        public virtual Region? Region { get; set; }
         public virtual ICollection<Request> Requests{ get; set; }
 
         public SportsTypes SportType { get; set; }

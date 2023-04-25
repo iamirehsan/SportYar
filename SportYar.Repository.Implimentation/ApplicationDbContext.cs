@@ -2,7 +2,6 @@
 using OfficeOpenXml;
 using SportYar.Domain.Entites;
 using SportYar.Domain.Entites.Wallet;
-using SportYar.Infrastructure.Excels;
 using SportYar.Repository.Implimentation.EntityConfigurations;
 
 namespace SportYar.Repository.Implimentation
@@ -24,8 +23,7 @@ namespace SportYar.Repository.Implimentation
         public  void SeedDataFromExcel<T>(string filePath , Dictionary<string,int> ExcelHeader) where T : class
         {
             using var package = new ExcelPackage(new FileInfo(filePath));
-            ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
-            worksheet.TrimLastEmptyRows();
+            var worksheet = package.Workbook.Worksheets[typeof(T).Name];
             var rows = worksheet.Dimension.Rows;
 
             var entityType = typeof(T);

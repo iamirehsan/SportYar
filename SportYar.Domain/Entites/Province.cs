@@ -8,7 +8,7 @@ namespace SportYar.Domain.Entites
 {
     public class Province:BaseEntity
     {
-        public virtual ICollection<City> Cities { get; set; }
+        //public virtual ICollection<City> Cities { get; set; }
         public string Name { get; set; }
     }
 }

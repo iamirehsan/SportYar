@@ -34,7 +34,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 4, 25, 19, 48, 37, 163, DateTimeKind.Local).AddTicks(4119));
+                        .HasDefaultValue(new DateTime(2023, 4, 25, 20, 39, 23, 463, DateTimeKind.Local).AddTicks(3992));
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -92,23 +92,19 @@ namespace SportYar.Repository.Implimentation.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 4, 25, 19, 48, 37, 163, DateTimeKind.Local).AddTicks(5227));
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProvinceId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProvinceId");
 
                     b.ToTable("Cities");
                 });
@@ -119,9 +115,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 4, 25, 19, 48, 37, 163, DateTimeKind.Local).AddTicks(5994));
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -140,13 +134,10 @@ namespace SportYar.Repository.Implimentation.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CityId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 4, 25, 19, 48, 37, 163, DateTimeKind.Local).AddTicks(4679));
+                        .HasDefaultValue(new DateTime(2023, 4, 25, 20, 39, 23, 463, DateTimeKind.Local).AddTicks(4551));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -159,8 +150,6 @@ namespace SportYar.Repository.Implimentation.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.ToTable("Regions");
                 });
@@ -176,7 +165,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 4, 25, 19, 48, 37, 163, DateTimeKind.Local).AddTicks(3504));
+                        .HasDefaultValue(new DateTime(2023, 4, 25, 20, 39, 23, 463, DateTimeKind.Local).AddTicks(3449));
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -216,7 +205,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 4, 25, 19, 48, 37, 163, DateTimeKind.Local).AddTicks(2546));
+                        .HasDefaultValue(new DateTime(2023, 4, 25, 20, 39, 23, 463, DateTimeKind.Local).AddTicks(2730));
 
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("datetime2");
@@ -293,24 +282,6 @@ namespace SportYar.Repository.Implimentation.Migrations
                     b.Navigation("Region");
                 });
 
-            modelBuilder.Entity("SportYar.Domain.Entites.City", b =>
-                {
-                    b.HasOne("SportYar.Domain.Entites.Province", "Province")
-                        .WithMany("Cities")
-                        .HasForeignKey("ProvinceId");
-
-                    b.Navigation("Province");
-                });
-
-            modelBuilder.Entity("SportYar.Domain.Entites.Region", b =>
-                {
-                    b.HasOne("SportYar.Domain.Entites.City", "City")
-                        .WithMany("Regions")
-                        .HasForeignKey("CityId");
-
-                    b.Navigation("City");
-                });
-
             modelBuilder.Entity("SportYar.Domain.Entites.Request", b =>
                 {
                     b.HasOne("SportYar.Domain.Entites.Announcement", "Announcement")
@@ -345,16 +316,6 @@ namespace SportYar.Repository.Implimentation.Migrations
             modelBuilder.Entity("SportYar.Domain.Entites.Announcement", b =>
                 {
                     b.Navigation("Requests");
-                });
-
-            modelBuilder.Entity("SportYar.Domain.Entites.City", b =>
-                {
-                    b.Navigation("Regions");
-                });
-
-            modelBuilder.Entity("SportYar.Domain.Entites.Province", b =>
-                {
-                    b.Navigation("Cities");
                 });
 
             modelBuilder.Entity("SportYar.Domain.Entites.Region", b =>

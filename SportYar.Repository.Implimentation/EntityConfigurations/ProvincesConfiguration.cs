@@ -13,7 +13,7 @@ namespace SportYar.Repository.Implimentation.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Province> builder)
         {
-            builder.HasMany(o => o.Cities).WithOne(o => o.Province).HasForeignKey(x => x.ProvinceId).IsRequired(false);
+            //builder.HasMany(o => o.Cities).WithOne(o => o.Province).HasForeignKey(x => x.ProvinceId).IsRequired(false);
         }
     }
 }

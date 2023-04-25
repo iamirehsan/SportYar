@@ -64,8 +64,8 @@ namespace SportYar.Repository.Implimentation
             modelBuilder.ApplyConfiguration(new RequestsConfigurations());
             modelBuilder.ApplyConfiguration(new AnnouncementsConfiguration());
             modelBuilder.ApplyConfiguration(new RegionsConfiguration());
-            modelBuilder.ApplyConfiguration(new CitiesConfiguration());
-            modelBuilder.ApplyConfiguration(new ProvincesConfiguration());
+            //modelBuilder.ApplyConfiguration(new CitiesConfiguration());
+            //modelBuilder.ApplyConfiguration(new ProvincesConfiguration());
 
 
         }

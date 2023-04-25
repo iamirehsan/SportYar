@@ -7,7 +7,7 @@ namespace SportYar
 {
     public static class WebHostExtension
     {
-        public static WebApplication Seed(this WebApplication host, string baseDirectory)
+        public static WebApplication SeedDatabase(this WebApplication host)
         {
 
             using (var scope = host.Services.CreateScope())
@@ -15,18 +15,39 @@ namespace SportYar
                 var serviceProvider = scope.ServiceProvider;
                 var databaseContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
                 databaseContext.Database.Migrate();
-                if(!databaseContext.Set<Province>().Any())
+
+              
+                   
+            }
+
+            return host;
+        }
+        public static WebApplication SeedExcel(this WebApplication host, string baseDirectory)
+        {
+
+            using (var scope = host.Services.CreateScope())
+            {
+                var serviceProvider = scope.ServiceProvider;
+                var databaseContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
+                if (!databaseContext.Set<Province>().Any())
                     databaseContext.SeedDataFromExcel<Province>(baseDirectory + "Province.xlsx", ExcelHeaders.ProvinceHeaders());
                 if (!databaseContext.Set<City>().Any())
                     databaseContext.SeedDataFromExcel<City>(baseDirectory + "City.xlsx", ExcelHeaders.CityHeaders());
                 if (!databaseContext.Set<Region>().Any())
                     databaseContext.SeedDataFromExcel<Region>(baseDirectory + "Region.xlsx", ExcelHeaders.RegionHeaders());
-              
-                    databaseContext.SaveChanges();
+
+                databaseContext.SaveChanges();
+
+
+
             }
 
             return host;
         }
     }
 
+
+
 }
+
+

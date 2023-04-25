@@ -25,7 +25,7 @@ namespace SportYar
             builder.Services.RegisterAllServices();
 
 
-            var app = builder.Build().Seed(builder.Configuration.GetValue<string>("ExcelRoot"));
+            var app = builder.Build().SeedDatabase().SeedExcel(builder.Configuration.GetValue<string>("ExcelRoot"));
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

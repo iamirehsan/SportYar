@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SportYar.Repository.Interfaces
 {
-    public interface IRegionsRepository : IRepository<Province>
+    public interface ICitiesRepository : IRepository<City>
     {
     }
 }

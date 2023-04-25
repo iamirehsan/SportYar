@@ -27,7 +27,7 @@ namespace SportYar.Base
                 opt.JsonSerializerOptions.Converters.Add(new DictionaryInt64Converter());
                 opt.JsonSerializerOptions.WriteIndented = true;
 
-            }).AddFluentValidation(f => f.RegisterValidatorsFromAssemblyContaining<SigninCommandValidator>());
+            })/*.AddFluentValidation(f => f.RegisterValidatorsFromAssemblyContaining<SigninCommandValidator>())*/;
         }
       
         public static void RegisterAllServices(this IServiceCollection services)

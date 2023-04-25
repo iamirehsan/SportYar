@@ -2,7 +2,7 @@
 
 namespace SportYar.Repository.Interfaces
 {
-    public interface IAnnouncementsRepository : IRepository<Announcement>
+    public interface IAnnouncementsRepository : IRepository<Province>
     {
     }
 }

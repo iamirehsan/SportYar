@@ -11,7 +11,10 @@ namespace SportYar.Repository
         public IRegionsRepository RegionsRepository { get; }
         public IAnnouncementsRepository AnnouncementsRepository { get; }
         public IRequestsRepository RequestsRepository { get; }
-   
+        public ICitiesRepository CitiesRepository{ get; }
+        public IProvincesRepository ProvincesRepository { get; }
+
+
 
 
     }

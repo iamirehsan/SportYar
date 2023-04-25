@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 using SportYar.Base;
 using SportYar.Repository.Implimentation;
 
@@ -9,9 +10,11 @@ namespace SportYar
     {
         public static void Main(string[] args)
         {
+         
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            ExcelPackage.LicenseContext = LicenseContext.Commercial;
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -22,7 +25,7 @@ namespace SportYar
             builder.Services.RegisterAllServices();
 
 
-            var app = builder.Build();
+            var app = builder.Build().Seed();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

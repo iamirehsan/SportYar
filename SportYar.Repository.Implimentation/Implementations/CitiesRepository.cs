@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace SportYar.Repository.Implimentation.Implementations
 {
-    public class RegionsRepository : Repository<Province>, IRegionsRepository
+    public class CitiesRepository : Repository<City>, ICitiesRepository
     {
-        public RegionsRepository(ApplicationDbContext context) : base(context)
+        public CitiesRepository(ApplicationDbContext context) : base(context)
         {
         }
     }

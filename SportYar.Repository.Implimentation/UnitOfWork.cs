@@ -9,6 +9,8 @@ namespace SportYar.Repository.Implimentation
     {
         private WalletsRepository _walletsRepository;
         private WalletsReceivesTransactionsRepository _walletsReceivesTransactionsRepository;
+        private CitiesRepository _citiesRepository;
+        private ProvincesRepository _provincesRepository;
         private WalletsPaymentsTransactionsRepository _walletsPaymentsTransactionsRepository;
         private RequestsRepository _requestsRepository;
         private AnnouncementsRepository _announcementsRepository;
@@ -31,7 +33,10 @@ namespace SportYar.Repository.Implimentation
         public IAnnouncementsRepository AnnouncementsRepository => _announcementsRepository = _announcementsRepository ?? new AnnouncementsRepository(_context) ;
 
         public IRequestsRepository RequestsRepository => _requestsRepository = _requestsRepository ?? new Implementations.RequestsRepository(_context);
- 
+
+        public ICitiesRepository CitiesRepository => _citiesRepository=_citiesRepository ?? new CitiesRepository(_context);
+
+        public IProvincesRepository ProvincesRepository => _provincesRepository = _provincesRepository ?? new ProvincesRepository(_context);
     }
 }
 

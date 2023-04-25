@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SportYar.Repository.Implimentation.Implementations
 {
-    public class AnnouncementsRepository : Repository<Announcement>, IAnnouncementsRepository
+    public class AnnouncementsRepository : Repository<Province>, IAnnouncementsRepository
     {
         public AnnouncementsRepository(ApplicationDbContext context) : base(context)
         {

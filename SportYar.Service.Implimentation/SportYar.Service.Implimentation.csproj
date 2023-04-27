@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SportYar.Repository\SportYar.Repository.csproj" />
     <ProjectReference Include="..\SportYar.Service\SportYar.Service.csproj" />
   </ItemGroup>
 

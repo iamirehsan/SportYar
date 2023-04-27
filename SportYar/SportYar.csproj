@@ -33,8 +33,4 @@
     <ProjectReference Include="..\SportYar.Service\SportYar.Service.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

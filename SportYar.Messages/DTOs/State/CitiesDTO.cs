@@ -9,5 +9,6 @@ namespace SportYar.Messages.DTOs.State
     public class CitiesDTO
     {
          public string Name{ get; set; }
+        public string Id { get; set; }
     }
 }

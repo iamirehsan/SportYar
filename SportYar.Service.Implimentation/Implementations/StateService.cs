@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SportYar.Domain.Entites;
+using SportYar.Infrastructure.Base;
 using SportYar.Messages.DTOs.State;
 using SportYar.Repository;
 using SportYar.Service.Interfaces;
@@ -20,32 +21,35 @@ namespace SportYar.Service.Implimentation.Implementations
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<CitiesDTO>> Cities(string name , string provinceId)
+        public async Task<IEnumerable<CitiesDTO>> Cities(int page, int pageSize, string orderByPropertyString, string? filterByPropertyString, string? filterByNameString, bool isDescending , string provinceId)
         {
-            var cities = string.IsNullOrEmpty(name) ? await  _unitOfWork.CitiesRepository.Where(x=>x.ProvinceId==provinceId).ToListAsync() : (await _unitOfWork.CitiesRepository.Where(x => x.Name.Contains(name) && x.ProvinceId==provinceId).ToListAsync());
+            var cities =  (await _unitOfWork.CitiesRepository.Where(x => x.ProvinceId == provinceId).ResponseActions(page, pageSize, orderByPropertyString, filterByPropertyString, filterByNameString, isDescending).ToListAsync());
             return cities.Select(x => new CitiesDTO()
             {
                 Name = x.Name,
                 Id = x.Id,
-                
-                
-            });;
+
+
+            }); ;
+ 
         }
 
-        public async Task<IEnumerable<RegionsDTO>> Regions(string name , string cityId)
+        public async Task<IEnumerable<RegionsDTO>> Regions(int page, int pageSize, string orderByPropertyString, string? filterByPropertyString, string? filterByNameString, bool isDescending, string cityId)
         {
-            var regions = string.IsNullOrEmpty(name) ? await _unitOfWork.RegionsRepository.Where(x=>x.CityId==cityId).ToListAsync() : (await _unitOfWork.RegionsRepository.Where(x => x.Name.Contains(name) && x.CityId==cityId).ToListAsync());
+            var regions = await _unitOfWork.RegionsRepository.Where(x => x.CityId == cityId).ResponseActions(page, pageSize, orderByPropertyString, filterByPropertyString, filterByNameString, isDescending).ToListAsync();
             return regions.Select(x => new RegionsDTO()
             {
                 Name = x.Name,
-                Id=x.Id,
+                Id = x.Id,
             });
         }
 
-        public async Task<IEnumerable<ProvincesDTO>> Provinces(string name)
+        public async Task<IEnumerable<ProvincesDTO>> Provinces(int page, int pageSize, string orderByPropertyString, string? filterByPropertyString, string? filterByNameString, bool isDescending)
+
         {
-            var regions = string.IsNullOrEmpty(name) ? await _unitOfWork.ProvincesRepository.GetAllAsync(): (await _unitOfWork.ProvincesRepository.Where(x => x.Name.Contains(name)).ToListAsync());
-            return regions.Select(x => new ProvincesDTO()
+            var a = _unitOfWork.ProvincesRepository.Where(x => x.Name.Contains("الب"));
+            var Provinces = await _unitOfWork.ProvincesRepository.AsQueryable().ResponseActions(page, pageSize, orderByPropertyString, filterByPropertyString, filterByNameString, isDescending).ToListAsync();
+            return Provinces.Select(x => new ProvincesDTO()
             {
                 Name = x.Name,
                 Id = x.Id,

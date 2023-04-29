@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using SportYar.Base;
+using SportYar.Base.Middleware;
 using SportYar.Repository.Implimentation;
 
 namespace SportYar
@@ -23,6 +24,7 @@ namespace SportYar
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
             builder.Services.RegisterJsonConverterAndCommandValidation();
             builder.Services.RegisterAllServices();
+            builder.Services.RegisterAuthentication(builder.Configuration);
 
 
             var app = builder.Build().SeedDatabase().SeedExcel(builder.Configuration.GetValue<string>("ExcelRoot"));
@@ -33,7 +35,8 @@ namespace SportYar
                 app.UseSwagger();
                 app.UseSwaggerUI(); 
             }
-
+            app.UseMiddleware<ReplaceWordsMiddleWare>();
+            app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();

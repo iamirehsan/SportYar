@@ -16,8 +16,8 @@ namespace SportYar
                 var databaseContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
                 databaseContext.Database.Migrate();
 
-              
-                   
+
+
             }
 
             return host;

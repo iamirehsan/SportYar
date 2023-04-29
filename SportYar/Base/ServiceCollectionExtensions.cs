@@ -7,6 +7,9 @@ using SportYar.Service.Interfaces;
 using SportYar.Service.Implimentation.Implementations;
 using SportYar.Repository;
 using SportYar.Repository.Implimentation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace SportYar.Base
 {
@@ -34,6 +37,27 @@ namespace SportYar.Base
         {
             services.AddScoped<IServiceHolder, ServiceHolder>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+        }
+        public static void RegisterAuthentication(this IServiceCollection services, ConfigurationManager configuration)
+        {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+           .AddJwtBearer(options =>
+           {
+               options.TokenValidationParameters = new TokenValidationParameters
+               {
+                   ValidateIssuer = true,
+                   ValidateAudience = true,
+                   ValidateLifetime = true,
+                   ValidateIssuerSigningKey = true,
+                   ValidIssuer = configuration["Jwt:Issuer"],
+                   ValidAudience = configuration["Jwt:Audience"],
+                   IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
+               };
+           });
         }
 
 

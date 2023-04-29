@@ -9,9 +9,9 @@ namespace SportYar.Service.Interfaces
 {
     public interface IStateService
     {
-        public Task<IEnumerable<CitiesDTO>> Cities(string name , string provinceId);
-        public Task<IEnumerable<RegionsDTO>> Regions(string name, string cityId);
-        public Task<IEnumerable<ProvincesDTO>> Provinces(string name);
+        public Task<IEnumerable<CitiesDTO>> Cities(int page, int pageSize, string orderByPropertyString, string? filterByPropertyString, string? filterByNameString , bool isDescending , string provinceId);
+        public Task<IEnumerable<RegionsDTO>> Regions(int page, int pageSize, string orderByPropertyString, string? filterByPropertyString, string? filterByNameString, bool isDescending , string cityId);
+        public Task<IEnumerable<ProvincesDTO>> Provinces(int page, int pageSize, string orderByPropertyString, string? filterByPropertyString, string? filterByNameString, bool isDescending);
 
 
     }

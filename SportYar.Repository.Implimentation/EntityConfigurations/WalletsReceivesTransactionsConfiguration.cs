@@ -13,7 +13,7 @@ namespace SportYar.Repository.Implimentation.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<WalletsReceivesTransaction> builder)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

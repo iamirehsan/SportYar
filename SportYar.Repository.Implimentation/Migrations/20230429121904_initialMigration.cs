@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SportYar.Repository.Implimentation.Migrations
 {
     /// <inheritdoc />
-    public partial class First : Migration
+    public partial class initialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProvinceId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(8866)),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -32,7 +32,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(9370)),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -47,7 +47,8 @@ namespace SportYar.Repository.Implimentation.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Number = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 25, 20, 39, 23, 463, DateTimeKind.Local).AddTicks(4551)),
+                    CityId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(8340)),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -62,7 +63,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Balance = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 25, 20, 39, 23, 463, DateTimeKind.Local).AddTicks(2730)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(5387)),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -88,7 +89,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsExpired = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 25, 20, 39, 23, 463, DateTimeKind.Local).AddTicks(3992)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(7806)),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -109,7 +110,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     WalletId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PaymentId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Balance = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(6092)),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -130,7 +131,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Balance = table.Column<int>(type: "int", nullable: false),
                     WalletId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(6678)),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -155,7 +156,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     IsExpired = table.Column<bool>(type: "bit", nullable: false),
                     PaymentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsPayedByWallet = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 25, 20, 39, 23, 463, DateTimeKind.Local).AddTicks(3449)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(7203)),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>

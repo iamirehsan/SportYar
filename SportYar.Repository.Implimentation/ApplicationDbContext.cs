@@ -38,10 +38,14 @@ namespace SportYar.Repository.Implimentation
                     foreach (var property in headerAndPropertiesIntersection)
                     {
                         var cellValue = worksheet.Cells[row, ExcelHeader[property.Name]].Value;
+                  
                         if (cellValue != null)
                         {
+                            cellValue = cellValue.ToString().Replace("ك", "ک");
+                            cellValue = cellValue.ToString().Replace("ي", "ی");
                             var convertedValue = Convert.ChangeType(cellValue, property.PropertyType);
                             property.SetValue(entity, convertedValue);
+                           
                         }
                     }
 
@@ -52,21 +56,18 @@ namespace SportYar.Repository.Implimentation
             }
 
            
-
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new WalletsConfiguration());
-            //modelBuilder.ApplyConfiguration(new WalletsPaymentsTransactionsConfiguration());
-            //modelBuilder.ApplyConfiguration(new WalletsReceivesTransactionsConfiguration());
+            modelBuilder.ApplyConfiguration(new WalletsPaymentsTransactionsConfiguration());
+            modelBuilder.ApplyConfiguration(new WalletsReceivesTransactionsConfiguration());
             modelBuilder.ApplyConfiguration(new RequestsConfigurations());
             modelBuilder.ApplyConfiguration(new AnnouncementsConfiguration());
             modelBuilder.ApplyConfiguration(new RegionsConfiguration());
-            //modelBuilder.ApplyConfiguration(new CitiesConfiguration());
-            //modelBuilder.ApplyConfiguration(new ProvincesConfiguration());
-
+            modelBuilder.ApplyConfiguration(new CitiesConfiguration());
+            modelBuilder.ApplyConfiguration(new ProvincesConfiguration());
 
         }
     }

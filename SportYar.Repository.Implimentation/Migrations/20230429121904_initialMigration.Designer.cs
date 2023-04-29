@@ -12,8 +12,8 @@ using SportYar.Repository.Implimentation;
 namespace SportYar.Repository.Implimentation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230425160923_First")]
-    partial class First
+    [Migration("20230429121904_initialMigration")]
+    partial class initialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 4, 25, 20, 39, 23, 463, DateTimeKind.Local).AddTicks(3992));
+                        .HasDefaultValue(new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(7806));
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -95,7 +95,9 @@ namespace SportYar.Repository.Implimentation.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(8866));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -118,7 +120,9 @@ namespace SportYar.Repository.Implimentation.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(9370));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -137,10 +141,13 @@ namespace SportYar.Repository.Implimentation.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CityId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 4, 25, 20, 39, 23, 463, DateTimeKind.Local).AddTicks(4551));
+                        .HasDefaultValue(new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(8340));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -168,7 +175,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 4, 25, 20, 39, 23, 463, DateTimeKind.Local).AddTicks(3449));
+                        .HasDefaultValue(new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(7203));
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -208,7 +215,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 4, 25, 20, 39, 23, 463, DateTimeKind.Local).AddTicks(2730));
+                        .HasDefaultValue(new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(5387));
 
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("datetime2");
@@ -231,7 +238,9 @@ namespace SportYar.Repository.Implimentation.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(6092));
 
                     b.Property<string>("PaymentId")
                         .IsRequired()
@@ -260,7 +269,9 @@ namespace SportYar.Repository.Implimentation.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(6678));
 
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("datetime2");

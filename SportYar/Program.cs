@@ -13,14 +13,16 @@ namespace SportYar
         {
          
             var builder = WebApplication.CreateBuilder(args);
+            builder.WebHost.UseUrls($"http://localhost:{builder.Configuration.GetValue<string>("port")}");
 
             // Add services to the container.
             ExcelPackage.LicenseContext = LicenseContext.Commercial;
+          
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            //builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
             builder.Services.RegisterJsonConverterAndCommandValidation();
             builder.Services.RegisterAllServices();
@@ -32,8 +34,8 @@ namespace SportYar
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI(); 
+                //app.UseSwagger();
+                //app.UseSwaggerUI(); 
             }
             app.UseMiddleware<ReplaceWordsMiddleWare>();
             app.UseMiddleware<ErrorHandlingMiddleware>();

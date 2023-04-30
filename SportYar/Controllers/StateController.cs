@@ -7,7 +7,7 @@ using SportYar.Service.Interfaces;
 
 namespace SportYar.Controllers
 {
-    [Route("api/SportYar/[controller]")]
+    [Route("api/sportyar/[controller]")]
     [ApiController]
     public class StateController : ApiControllerBase
     {

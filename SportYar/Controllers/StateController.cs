@@ -22,47 +22,31 @@ namespace SportYar.Controllers
         [HttpGet("Cities")]
         public async Task<IActionResult> Cities(string provinceId)
         {
-            try
-            {
-                
-                var result = await _serviceHolder.StateService.Cities(Parameters, provinceId);
-                return OkResult("لیست شهر ها", result, result.Count());
-            }
-            catch (ManagedException ex)
-            {
 
-                return BadRequest(ex.Message);
-            }
+            var result = await _serviceHolder.StateService.Cities(Parameters, provinceId);
+            return OkResult("لیست شهر ها", result, result.Count());
+
+
         }
         [AllowAnonymous]
         [HttpGet("Provinces")]
         public async Task<IActionResult> Provinces()
         {
-            try
-            {
- 
-                var result = await _serviceHolder.StateService.Provinces(Parameters);
-                return OkResult("لیست استان ها", result, result.Count());
-            }
-            catch (ManagedException ex)
-            {
 
-                return BadRequest(ex.Message);
-            }
+            var result = await _serviceHolder.StateService.Provinces(Parameters);
+            return OkResult("لیست استان ها", result, result.Count());
+
+
         }
         [AllowAnonymous]
         [HttpGet("Regions")]
-        public async Task<IActionResult> Regions(string cityId )
+        public async Task<IActionResult> Regions(string cityId)
         {
-            try
             {
-                var result = await _serviceHolder.StateService.Regions(Parameters ,cityId);
+                var result = await _serviceHolder.StateService.Regions(Parameters, cityId);
                 return OkResult("لیست محله ها", result, result.Count());
-            }
-            catch (ManagedException ex)
-            {
 
-                return BadRequest(ex.Message);
+
             }
         }
     }

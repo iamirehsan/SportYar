@@ -7,6 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Base\Seed\City.xlsx" />
+    <None Remove="Base\Seed\Region.xlsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Base\Seed\City.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\Seed\Region.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EPPlus" Version="6.2.2" />
     <PackageReference Include="FluentValidation" Version="11.5.2" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
@@ -31,6 +45,12 @@
     <ProjectReference Include="..\SportYar.Repository\SportYar.Repository.csproj" />
     <ProjectReference Include="..\SportYar.Service.Implimentation\SportYar.Service.Implimentation.csproj" />
     <ProjectReference Include="..\SportYar.Service\SportYar.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Base\Seed\Province.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

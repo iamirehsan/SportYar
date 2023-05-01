@@ -48,7 +48,7 @@ namespace SportYar.Service.Implimentation.Implementations
         public async Task<IEnumerable<ProvincesDTO>> Provinces(URLParameters parameters)
 
         {
-            var a = _unitOfWork.ProvincesRepository.Where(x => x.Name.Contains("الب"));
+            throw new ManagedException("Fuckkkkkk");
             var Provinces = await _unitOfWork.ProvincesRepository.AsQueryable().ResponseActions(parameters).ToListAsync();
             return Provinces.Select(x => new ProvincesDTO()
             {

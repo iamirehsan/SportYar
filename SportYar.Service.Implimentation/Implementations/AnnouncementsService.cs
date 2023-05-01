@@ -1,4 +1,5 @@
 ﻿using SportYar.Messages;
+using SportYar.Messages.DTOs;
 using SportYar.Repository;
 using SportYar.Service.Interfaces;
 using System;
@@ -18,9 +19,9 @@ namespace SportYar.Service.Implimentation.Implementations
             _unitOfWork = unitOfWork;
         }
 
-        //public Task<IEnumerable<AnnouncementsDTO>> Announcements(URLParameters parameters)
+        //public Task<IEnumerable<AnnouncementsDTO>> Announcements(URLParameters parameters , string userId)
         //{
-
+        //    var announcements = _unitOfWork.AnnouncementsRepository.Where(x => x.UserId == userId);
         //}
     }
 }

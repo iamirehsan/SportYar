@@ -30,11 +30,11 @@ namespace SportYar
                 var serviceProvider = scope.ServiceProvider;
                 var databaseContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
                 if (!databaseContext.Set<Province>().Any())
-                    databaseContext.SeedDataFromExcel<Province>(baseDirectory + "Province.xlsx", ExcelHeaders.ProvinceHeaders());
+                    databaseContext.SeedDataFromExcel<Province>("SportYar\\SportYar.Infrastructure\\Excels\\Seed\\Province.xlsx", ExcelHeaders.ProvinceHeaders());
                 if (!databaseContext.Set<City>().Any())
-                    databaseContext.SeedDataFromExcel<City>(baseDirectory + "City.xlsx", ExcelHeaders.CityHeaders());
+                    databaseContext.SeedDataFromExcel<City>("SportYar\\SportYar.Infrastructure\\Excels\\Seed\\City.xlsx", ExcelHeaders.CityHeaders());
                 if (!databaseContext.Set<Region>().Any())
-                    databaseContext.SeedDataFromExcel<Region>(baseDirectory + "Region.xlsx", ExcelHeaders.RegionHeaders());
+                    databaseContext.SeedDataFromExcel<Region>("SportYar\\SportYar.Infrastructure\\Excels\\Seed\\Region.xlsx", ExcelHeaders.RegionHeaders());
 
                 databaseContext.SaveChanges();
 

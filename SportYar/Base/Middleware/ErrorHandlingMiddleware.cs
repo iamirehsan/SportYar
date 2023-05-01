@@ -1,4 +1,8 @@
-﻿using System.Net;
+﻿using Azure;
+using SportYar.Infrastructure.Base;
+using System;
+using System.Net;
+using System.Text.Json;
 
 namespace SportYar.Base.Middleware
 {
@@ -17,15 +21,31 @@ namespace SportYar.Base.Middleware
             {
                 await _next(context);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
+                var response = context.Response;
+                response.ContentType = "application/json";
+                dynamic message;  
+                switch (exception)
+                {
+                    case ManagedException ex:
+                        // custom application error
+                        response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        message = ex.ErrorMessage;
+                    
+                        break;
+                    default:
+                        // unhandled error
+                        response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        message = exception.Message;
+                        break;
+                }
                 // Log the exception
-                Console.WriteLine($"An error occurred: {ex}");
+                Console.WriteLine($"An error occurred: {exception}");
 
                 // Return an error response to the client
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                context.Response.ContentType = "text/plain";
-                await context.Response.WriteAsync("خطای سیستمی رخ داده است لطفا با پشتیبانی تماس حاصل کنید.");
+                var result = JsonSerializer.Serialize(new { message = message });
+                await response.WriteAsync(result);
             }
         }
     }

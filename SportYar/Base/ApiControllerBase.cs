@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using SportYar.Messages;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace SportYar.Base
@@ -13,6 +16,8 @@ namespace SportYar.Base
 
         protected virtual string UserName => GetClaim(AccessToken, "userName");
         protected virtual string UserId => GetClaim(AccessToken, "userId");
+
+        protected   URLParameters? Parameters => DeserializeParams();
 
 
         protected ApiControllerBase()
@@ -59,6 +64,17 @@ namespace SportYar.Base
         protected virtual IActionResult OkResult(string message, object content, int total)
         {
             return Ok(new ResponseMessage(message, content, total));
+        }
+        [NonAction]
+       private URLParameters? DeserializeParams()
+        {
+            if(Request.Method == "GET")
+            {
+                var a = Request.Query.Keys;
+                var jsonParams = Request.Query.FirstOrDefault(x => x.Key == "parameters").Value;
+                return JsonConvert.DeserializeObject<URLParameters>(jsonParams);
+            }
+            return null;
         }
         private string GetClaim(string jwtToken, string claimName)
         {

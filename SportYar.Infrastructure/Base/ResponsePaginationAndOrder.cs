@@ -1,25 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using OfficeOpenXml.FormulaParsing.ExpressionGraph;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using SportYar.Messages;
 using Expression = System.Linq.Expressions.Expression;
 
 namespace SportYar.Infrastructure.Base
 {
     public static class ResponsePaginationAndOrder
     {
-        public static IQueryable<T> ResponseActions<T>(this IQueryable<T> values, int page, int pageSize, string orderByPropertyString, string? filterByPropertyString, string? filterByNameString, bool isDedescending)
+        public static IQueryable<T> ResponseActions<T>(this IQueryable<T> values, URLParameters parameters)
         {
 
             var entityType = typeof(T);
-            ValidateSortOrFilter(entityType, orderByPropertyString);
-            var datas = values.CustomOrderBy(orderByPropertyString, isDedescending);
-            if (filterByPropertyString is not null)
+            ValidateSortOrFilter(entityType, parameters.OrderByPropertyString);
+            var datas = values.CustomOrderBy(parameters.OrderByPropertyString, parameters.IsDescending);
+            if (parameters.FilterByPropertyString is not null)
             {
-                ValidateSortOrFilter(entityType, filterByPropertyString);
-                datas = datas.WhereContains(filterByPropertyString, filterByNameString);
+                ValidateSortOrFilter(entityType, parameters.FilterByPropertyString);
+                datas = datas.WhereContains(parameters.FilterByPropertyString, parameters.FilterByNameString);
             }
-            datas = datas.Skip((page - 1) * pageSize).Take(pageSize);
+            datas = datas.Skip((parameters.Page - 1) * parameters.PageSize).Take(parameters.PageSize);
             return datas;
         }
 

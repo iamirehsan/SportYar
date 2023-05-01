@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SportYar.Base;
 using SportYar.Infrastructure.Base;
+using SportYar.Messages;
 using SportYar.Service.Interfaces;
 
 namespace SportYar.Controllers
@@ -19,11 +20,12 @@ namespace SportYar.Controllers
         }
         [AllowAnonymous]
         [HttpGet("Cities")]
-        public async Task<IActionResult> Cities(string provinceId, int page, int pageSize, string orderByPropertyString, string? filterByPropertyString, string? filterByNameString, bool isDescending = false)
+        public async Task<IActionResult> Cities(string provinceId)
         {
             try
             {
-                var result = await _serviceHolder.StateService.Cities(page, pageSize, orderByPropertyString, filterByPropertyString, filterByNameString, isDescending, provinceId);
+                
+                var result = await _serviceHolder.StateService.Cities(Parameters, provinceId);
                 return OkResult("لیست شهر ها", result, result.Count());
             }
             catch (ManagedException ex)
@@ -34,11 +36,12 @@ namespace SportYar.Controllers
         }
         [AllowAnonymous]
         [HttpGet("Provinces")]
-        public async Task<IActionResult> Provinces(int page, int pageSize, string orderByPropertyString, string? filterByPropertyString, string? filterByNameString, bool isDescending = false)
+        public async Task<IActionResult> Provinces()
         {
             try
             {
-                var result = await _serviceHolder.StateService.Provinces(page, pageSize, orderByPropertyString, filterByPropertyString, filterByNameString, isDescending);
+ 
+                var result = await _serviceHolder.StateService.Provinces(Parameters);
                 return OkResult("لیست استان ها", result, result.Count());
             }
             catch (ManagedException ex)
@@ -49,11 +52,11 @@ namespace SportYar.Controllers
         }
         [AllowAnonymous]
         [HttpGet("Regions")]
-        public async Task<IActionResult> Regions(string cityId , int page, int pageSize, string orderByPropertyString, string? filterByPropertyString, string? filterByNameString, bool isDescending = false)
+        public async Task<IActionResult> Regions(string cityId )
         {
             try
             {
-                var result = await _serviceHolder.StateService.Regions(page, pageSize, orderByPropertyString, filterByPropertyString, filterByNameString, isDescending ,cityId);
+                var result = await _serviceHolder.StateService.Regions(Parameters ,cityId);
                 return OkResult("لیست محله ها", result, result.Count());
             }
             catch (ManagedException ex)

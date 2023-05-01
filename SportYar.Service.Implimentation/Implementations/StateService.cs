@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SportYar.Domain.Entites;
 using SportYar.Infrastructure.Base;
+using SportYar.Messages;
 using SportYar.Messages.DTOs.State;
 using SportYar.Repository;
 using SportYar.Service.Interfaces;
@@ -21,9 +22,9 @@ namespace SportYar.Service.Implimentation.Implementations
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<CitiesDTO>> Cities(int page, int pageSize, string orderByPropertyString, string? filterByPropertyString, string? filterByNameString, bool isDescending , string provinceId)
+        public async Task<IEnumerable<CitiesDTO>> Cities(URLParameters parameters, string provinceId)
         {
-            var cities =  (await _unitOfWork.CitiesRepository.Where(x => x.ProvinceId == provinceId).ResponseActions(page, pageSize, orderByPropertyString, filterByPropertyString, filterByNameString, isDescending).ToListAsync());
+            var cities =  (await _unitOfWork.CitiesRepository.Where(x => x.ProvinceId == provinceId).ResponseActions(parameters).ToListAsync());
             return cities.Select(x => new CitiesDTO()
             {
                 Name = x.Name,
@@ -34,9 +35,9 @@ namespace SportYar.Service.Implimentation.Implementations
  
         }
 
-        public async Task<IEnumerable<RegionsDTO>> Regions(int page, int pageSize, string orderByPropertyString, string? filterByPropertyString, string? filterByNameString, bool isDescending, string cityId)
+        public async Task<IEnumerable<RegionsDTO>> Regions(URLParameters parameters , string cityId)
         {
-            var regions = await _unitOfWork.RegionsRepository.Where(x => x.CityId == cityId).ResponseActions(page, pageSize, orderByPropertyString, filterByPropertyString, filterByNameString, isDescending).ToListAsync();
+            var regions = await _unitOfWork.RegionsRepository.Where(x => x.CityId == cityId).ResponseActions(parameters).ToListAsync();
             return regions.Select(x => new RegionsDTO()
             {
                 Name = x.Name,
@@ -44,11 +45,11 @@ namespace SportYar.Service.Implimentation.Implementations
             });
         }
 
-        public async Task<IEnumerable<ProvincesDTO>> Provinces(int page, int pageSize, string orderByPropertyString, string? filterByPropertyString, string? filterByNameString, bool isDescending)
+        public async Task<IEnumerable<ProvincesDTO>> Provinces(URLParameters parameters)
 
         {
             var a = _unitOfWork.ProvincesRepository.Where(x => x.Name.Contains("الب"));
-            var Provinces = await _unitOfWork.ProvincesRepository.AsQueryable().ResponseActions(page, pageSize, orderByPropertyString, filterByPropertyString, filterByNameString, isDescending).ToListAsync();
+            var Provinces = await _unitOfWork.ProvincesRepository.AsQueryable().ResponseActions(parameters).ToListAsync();
             return Provinces.Select(x => new ProvincesDTO()
             {
                 Name = x.Name,

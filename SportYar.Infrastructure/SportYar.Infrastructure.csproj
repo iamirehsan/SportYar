@@ -25,4 +25,8 @@
     <PackageReference Include="System.Reflection.Metadata" Version="7.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SportYar.Messages\SportYar.Messages.csproj" />
+  </ItemGroup>
+
 </Project>

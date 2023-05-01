@@ -3,8 +3,6 @@ using OfficeOpenXml;
 using SportYar.Domain.Entites;
 using SportYar.Domain.Entites.Wallet;
 using SportYar.Repository.Implimentation.EntityConfigurations;
-using System.Reflection;
-using System.Security;
 
 namespace SportYar.Repository.Implimentation
 {
@@ -24,21 +22,14 @@ namespace SportYar.Repository.Implimentation
 
         public  void SeedDataFromExcel<T>(string filePath , Dictionary<string,int> ExcelHeader) where T : class
         {
-            var buildDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var aa = buildDir + @"\Seed\Province.xlsx";
-            XLWorkbook bb = new(filePath);
-    
-            var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "YourProjectName.ExcelFileName.xlsx"; // Replace with your Excel file name and path
-            var stream = assembly.GetManifestResourceStream(resourceName);
-            using (var package = new ExcelPackage(stream))
+            using (var package = new ExcelPackage(new FileInfo(filePath)))
             {
                 var worksheet = package.Workbook.Worksheets.First();
                 var rows = worksheet.Dimension.Rows;
                 var entityType = typeof(T);
                 var properties = entityType.GetProperties()
                     .Where(p => p.CanWrite && !p.GetGetMethod().IsVirtual);
-                var headerAndPropertiesIntersection = properties.Where(c => ExcelHeader.Keys.Contains(c.Name));
+                var headerAndPropertiesIntersection = properties.Where(c=> ExcelHeader.Keys.Contains(c.Name));
 
                 for (int row = 2; row <= rows; row++)
                 {
@@ -47,21 +38,21 @@ namespace SportYar.Repository.Implimentation
                     foreach (var property in headerAndPropertiesIntersection)
                     {
                         var cellValue = worksheet.Cells[row, ExcelHeader[property.Name]].Value;
-
+                  
                         if (cellValue != null)
                         {
                             cellValue = cellValue.ToString().Replace("ك", "ک");
                             cellValue = cellValue.ToString().Replace("ي", "ی");
                             var convertedValue = Convert.ChangeType(cellValue, property.PropertyType);
                             property.SetValue(entity, convertedValue);
-
+                           
                         }
                     }
 
                     Set<T>().Add(entity);
                 }
 
-
+                
             }
 
            

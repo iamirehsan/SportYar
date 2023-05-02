@@ -1,5 +1,4 @@
-﻿using SportYar.Messages;
-using Expression = System.Linq.Expressions.Expression;
+﻿using Expression = System.Linq.Expressions.Expression;
 
 namespace SportYar.Infrastructure.Base
 {

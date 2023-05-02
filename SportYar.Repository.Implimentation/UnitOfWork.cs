@@ -37,6 +37,11 @@ namespace SportYar.Repository.Implimentation
         public ICitiesRepository CitiesRepository => _citiesRepository=_citiesRepository ?? new CitiesRepository(_context);
 
         public IProvincesRepository ProvincesRepository => _provincesRepository = _provincesRepository ?? new ProvincesRepository(_context);
+
+        public async Task SaveAsync()
+        {
+             await _context.SaveChangesAsync();
+        }
     }
 }
 

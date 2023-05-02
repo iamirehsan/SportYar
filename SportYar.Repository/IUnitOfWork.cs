@@ -13,6 +13,7 @@ namespace SportYar.Repository
         public IRequestsRepository RequestsRepository { get; }
         public ICitiesRepository CitiesRepository{ get; }
         public IProvincesRepository ProvincesRepository { get; }
+        public Task SaveAsync();
 
 
 

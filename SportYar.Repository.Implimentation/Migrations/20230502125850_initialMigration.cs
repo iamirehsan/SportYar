@@ -18,7 +18,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProvinceId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(8866)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 2, 17, 28, 50, 288, DateTimeKind.Local).AddTicks(2205)),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -32,7 +32,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(9370)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 2, 17, 28, 50, 288, DateTimeKind.Local).AddTicks(2726)),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -48,7 +48,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     Number = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CityId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(8340)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 2, 17, 28, 50, 288, DateTimeKind.Local).AddTicks(1679)),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -63,7 +63,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Balance = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(5387)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 2, 17, 28, 50, 287, DateTimeKind.Local).AddTicks(8729)),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -82,14 +82,13 @@ namespace SportYar.Repository.Implimentation.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StartingTimeInPersian = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EndingTimeInPersian = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    participant = table.Column<int>(type: "int", nullable: false),
+                    Participant = table.Column<int>(type: "int", nullable: false),
                     PricePerparticipant = table.Column<int>(type: "int", nullable: false),
-                    GeneralPrice = table.Column<int>(type: "int", nullable: false),
-                    Adress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsExpired = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(7806)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 2, 17, 28, 50, 288, DateTimeKind.Local).AddTicks(1100)),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -110,7 +109,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     WalletId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PaymentId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Balance = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(6092)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 2, 17, 28, 50, 287, DateTimeKind.Local).AddTicks(9507)),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -131,7 +130,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Balance = table.Column<int>(type: "int", nullable: false),
                     WalletId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(6678)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 2, 17, 28, 50, 288, DateTimeKind.Local).AddTicks(58)),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -156,7 +155,7 @@ namespace SportYar.Repository.Implimentation.Migrations
                     IsExpired = table.Column<bool>(type: "bit", nullable: false),
                     PaymentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsPayedByWallet = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 29, 16, 49, 4, 860, DateTimeKind.Local).AddTicks(7203)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 2, 17, 28, 50, 288, DateTimeKind.Local).AddTicks(576)),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>

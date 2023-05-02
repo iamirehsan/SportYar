@@ -10,6 +10,8 @@ using SportYar.Repository.Implimentation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace SportYar.Base
 {
@@ -37,6 +39,10 @@ namespace SportYar.Base
         {
             services.AddScoped<IServiceHolder, ServiceHolder>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton<IMapper>(AutoMapperConfig.Initialize());
+      
+
+
         }
         public static void RegisterAuthentication(this IServiceCollection services, ConfigurationManager configuration)
         {

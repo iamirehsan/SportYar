@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SportYar.Messages
+namespace SportYar.Infrastructure.Base
 {
     public class URLParameters
     {
@@ -14,8 +14,8 @@ namespace SportYar.Messages
         public string? FilterByPropertyString { get; set; }
         public string? FilterByNameString { get; set; }
         public bool IsDescending { get; set; }
-     
-      
+
+
 
     }
 }

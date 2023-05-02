@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SportYar.Domain.Entites;
 using SportYar.Infrastructure.Base;
-using SportYar.Messages;
 using SportYar.Messages.DTOs.State;
 using SportYar.Repository;
 using SportYar.Service.Interfaces;
@@ -48,7 +47,7 @@ namespace SportYar.Service.Implimentation.Implementations
         public async Task<IEnumerable<ProvincesDTO>> Provinces(URLParameters parameters)
 
         {
-            throw new ManagedException("Fuckkkkkk");
+      
             var Provinces = await _unitOfWork.ProvincesRepository.AsQueryable().ResponseActions(parameters).ToListAsync();
             return Provinces.Select(x => new ProvincesDTO()
             {

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SportYar.Messages;
+using SportYar.Infrastructure.Base;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace SportYar.Base
@@ -11,7 +11,7 @@ namespace SportYar.Base
     [ApiController]
     public class ApiControllerBase : ControllerBase
     {
-
+  
         protected string AccessToken => GetToken(Request);
 
         protected virtual string UserName => GetClaim(AccessToken, "userName");

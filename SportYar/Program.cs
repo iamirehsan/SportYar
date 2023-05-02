@@ -37,12 +37,14 @@ namespace SportYar
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+     
             app.UseMiddleware<ReplaceWordsMiddleWare>();
+            app.UseMiddleware<TokenClaimsMiddleware>();
             app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
+ 
 
             app.MapControllers();
 

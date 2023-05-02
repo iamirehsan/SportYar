@@ -18,13 +18,27 @@ namespace SportYar.Domain.Entites
         public DateTime Date{ get; set; }
         public string StartingTimeInPersian { get; set; }
         public string EndingTimeInPersian { get; set; }
-        public int participant { get; set; }
+        public int Participant { get; set; }
         public int PricePerparticipant { get; set; }
-        public int GeneralPrice { get; set; }
-        public string Adress{ get; set; }
+  
+        public string Address{ get; set; }
         public string Description { get; set; }
         public bool IsExpired { get; set; }
         public bool IsDeleted { get; set; }
 
+        public Announcement(string userId , SportsTypes sportType, DateTime date, string startingTimeInPersian, string endingTimeInPersian, 
+            int participant, int pricePerparticipant,string address, string description)
+        {
+            UserId = userId;
+            SportType = sportType;
+            Date = date;
+            StartingTimeInPersian = startingTimeInPersian;
+            EndingTimeInPersian = endingTimeInPersian;
+            Participant = participant;
+            PricePerparticipant = pricePerparticipant;
+            Address = address;
+            Description = description;
+ 
+        }
     }
 }

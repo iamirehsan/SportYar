@@ -23,8 +23,6 @@ namespace SportYar.Messages.Commands
         [Required]
         public int PricePerparticipant { get; set; }
         [Required]
-        public int GeneralPrice { get; set; }
-        [Required]
         public string Address { get; set; }
         public string? Description { get; set; }
         [Required]

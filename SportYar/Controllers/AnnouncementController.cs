@@ -9,11 +9,11 @@ namespace SportYar.Controllers
 {
     [Route("api/sportyar/[controller]")]
     [ApiController]
-    public class AnnouncementsController : ApiControllerBase
+    public class AnnouncementController : ApiControllerBase
     {
         private readonly IServiceHolder _serviceHolder;
 
-        public AnnouncementsController(IServiceHolder serviceHolder)
+        public AnnouncementController(IServiceHolder serviceHolder)
         {
             _serviceHolder = serviceHolder;
         }
@@ -26,7 +26,6 @@ namespace SportYar.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatesAnnouncement(CreateOrUpdateAnnouncementsCommand cmd)
         {
-
             var result = await _serviceHolder.AnnouncementsService.CreateAnnouncements(cmd);
             return OkResult("آگهی با موفقیت ساخته شد." , new { Id = result } , 1);
         }

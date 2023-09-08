@@ -27,16 +27,19 @@ namespace SportYar.Service.Implimentation.Implementations
 
         public async Task<IEnumerable<AnnouncementsDTO>> Announcements(URLParameters parameters, bool isExpiredAllowed)
         {
-            var announcements = _unitOfWork.AnnouncementsRepository.Where(x => x.UserId == TokenClaims.GetTokenUserId() && x.IsDeleted == false && x.IsExpired == isExpiredAllowed);
-            var result = (await announcements.Select(x => _mapper.Map<AnnouncementsDTO>(x)).ResponseActions(parameters).ToListAsync());
+ 
+            var announcements = await _unitOfWork.AnnouncementsRepository.Where(x => x.UserId == TokenClaims.GetTokenUserId() && x.IsDeleted == false && x.IsExpired == isExpiredAllowed).ToListAsync();
+            var result =  announcements.Select(x => _mapper.Map<AnnouncementsDTO>(x)).ResponseActions(parameters);
             return result;
 
         }
         public async Task<string> CreateAnnouncements(CreateOrUpdateAnnouncementsCommand cmd)
         {
-            var announcements = new Announcement(TokenClaims.GetTokenUserId(), cmd.SportType, cmd.Date, cmd.StartingTimeInPersian, cmd.EndingTimeInPersian, cmd.Participant,
-            cmd.GeneralPrice, cmd.Address, cmd.Description);
-            announcements.Region = await _unitOfWork.RegionsRepository.FirstOrDefaultAsync(x => x.Id == cmd.RegionId);
+            var announcements = new Announcement(TokenClaims.GetTokenUserId(), cmd.SportType, cmd.Date, cmd.StartingTimeInPersian, cmd.EndingTimeInPersian, cmd.Participant,cmd.PricePerparticipant,
+             cmd.Address, cmd.Description);
+            var region= await _unitOfWork.RegionsRepository.FirstOrDefaultAsync(x => x.Id == cmd.RegionId);
+            announcements.RegionId = region.Id;
+            await _unitOfWork.AnnouncementsRepository.AddAsync(announcements);
             await _unitOfWork.SaveAsync();
             return announcements.Id;
 

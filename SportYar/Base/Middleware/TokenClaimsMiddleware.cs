@@ -12,9 +12,11 @@ public class TokenClaimsMiddleware  : IDisposable
     public TokenClaimsMiddleware(RequestDelegate next)
     {
         _next = next;
+
     }
     public async Task InvokeAsync(HttpContext context) 
     {
+        TokenClaims.Dispose();
         var token = context.Request.Headers.ContainsKey("Authorization")
                                                                       ? context.Request.Headers["Authorization"].ToString().Split(" ")[1]
                                                                       : string.Empty;
@@ -28,10 +30,9 @@ public class TokenClaimsMiddleware  : IDisposable
 
         var serviceProvider = context.RequestServices.GetService<IServiceProvider>();
         var tokenClaimsSingleton = new ServiceDescriptor(typeof(TokenClaims), _tokenClaims);
-        ((IServiceCollection)serviceProvider.GetService(typeof(IServiceCollection))).Add(tokenClaimsSingleton);
 
-        // invoke the next middleware in the pipeline
         await _next(context);
+      
     }
 
     public void Dispose()

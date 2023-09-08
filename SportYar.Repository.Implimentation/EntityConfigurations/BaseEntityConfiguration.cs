@@ -10,7 +10,8 @@ public abstract class BaseEntityConfiguration<TEntity> : IEntityTypeConfiguratio
         // Configure common properties for all entities that inherit from BaseEntity
         builder.HasKey(e => e.Id);
         builder.Property(e => e.CreatedAt).IsRequired();
-        builder.Property(e => e.CreatedAt).HasDefaultValue(DateTime.Now); 
+        builder.Property(e => e.CreatedAt).HasDefaultValue(DateTime.Now);
+        builder.Property(e => e.UpdateAt).HasDefaultValue(DateTime.Now);
 
 
     }

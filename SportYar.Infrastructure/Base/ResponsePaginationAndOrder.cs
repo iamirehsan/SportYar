@@ -1,4 +1,5 @@
-﻿using Expression = System.Linq.Expressions.Expression;
+﻿using System.Linq.Expressions;
+using Expression = System.Linq.Expressions.Expression;
 
 namespace SportYar.Infrastructure.Base
 {
@@ -29,6 +30,32 @@ namespace SportYar.Infrastructure.Base
             var lambda = Expression.Lambda<Func<T, bool>>(call, parameter);
             return source.Where(lambda);
         }
+        public static IEnumerable<T> ResponseActions<T>(this IEnumerable<T> values, URLParameters parameters)
+        {
+
+            var entityType = typeof(T);
+            ValidateSortOrFilter(entityType, parameters.OrderByPropertyString);
+            var datas = values.CustomOrderBy(parameters.OrderByPropertyString, parameters.IsDescending);
+            if (parameters.FilterByPropertyString is not null)
+            {
+                ValidateSortOrFilter(entityType, parameters.FilterByPropertyString);
+                datas = datas.WhereContains(parameters.FilterByPropertyString, parameters.FilterByNameString);
+            }
+            datas = datas.Skip((parameters.Page - 1) * parameters.PageSize).Take(parameters.PageSize);
+            return datas;
+        }
+
+        private static IEnumerable<T> WhereContains<T>(this IEnumerable<T> source, string propertyName, string value)
+        {
+            var parameter = Expression.Parameter(typeof(T), "x");
+            var property = Expression.Property(parameter, propertyName);
+            var constant = Expression.Constant(value);
+            var containsMethod = typeof(string).GetMethod("Contains", new[] { typeof(string) });
+            var call = Expression.Call(property, containsMethod, constant);
+            var lambda = Expression.Lambda<Func<T, bool>>(call, parameter);
+            Func<T, bool> func = lambda.Compile();
+            return source.Where(func);
+        }
 
         private static IQueryable<T> CustomOrderBy<T>(this IQueryable<T> source, string propertyName, bool isDescending)
         {
@@ -39,6 +66,17 @@ namespace SportYar.Infrastructure.Base
             var data = isDescending ? source.OrderByDescending(expression) : source.OrderBy(expression);
             return data;
         }
+
+        private static IEnumerable<T> CustomOrderBy<T>(this IEnumerable<T> source, string propertyName, bool isDescending)
+        {
+            var parameter = Expression.Parameter(typeof(T), "x");
+            var property = Expression.Property(parameter, propertyName);
+            var convert = Expression.Convert(property, typeof(object));
+            var expression = Expression.Lambda<Func<T, object>>(convert, parameter);
+            Func<T, object> func = expression.Compile();
+            var data = isDescending ? source.OrderByDescending(func) : source.OrderBy(func);
+            return data;
+        }
         private static void ValidateSortOrFilter(Type? entityType, string propertyName)
         {
             var filterByPropertey = entityType.GetProperties()
@@ -46,6 +84,7 @@ namespace SportYar.Infrastructure.Base
             if (filterByPropertey is null)
                 throw new ManagedException($"بر اساس {propertyName} نمیتوان فیلتر/سورت کرد");
         }
+     
 
 
 

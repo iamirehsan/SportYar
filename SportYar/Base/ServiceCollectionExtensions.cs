@@ -12,6 +12,18 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
+using SportYar.Domain.Entites;
+using SportYar.Messages.DTOs;
+using AutoMapper;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using SportYar.Domain.Entites;
+using SportYar.Messages.DTOs;
+using SportYar.Infrastructure.Base;
 
 namespace SportYar.Base
 {
@@ -39,8 +51,23 @@ namespace SportYar.Base
         {
             services.AddScoped<IServiceHolder, ServiceHolder>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddSingleton<IMapper>(AutoMapperConfig.Initialize());
-      
+          
+
+
+        }
+        public static void RegisterAutoMapper(this IServiceCollection services)
+        {
+            
+
+            // Create the mapping between Announcement and AnnouncementsDTO
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.CreateMap<Announcement, AnnouncementsDTO>();
+            });
+
+            // Register the IMapper instance with the dependency injection container
+            services.AddSingleton(mapperConfig.CreateMapper());
+
 
 
         }

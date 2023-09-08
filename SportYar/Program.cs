@@ -27,6 +27,7 @@ namespace SportYar
             builder.Services.RegisterJsonConverterAndCommandValidation();
             builder.Services.RegisterAllServices();
             builder.Services.RegisterAuthentication(builder.Configuration);
+            builder.Services.RegisterAutoMapper();
 
 
             var app = builder.Build().SeedDatabase().SeedExcel(builder.Configuration.GetValue<string>("ExcelRoot"));
@@ -37,13 +38,13 @@ namespace SportYar
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-     
+            app.UseAuthorization();
             app.UseMiddleware<ReplaceWordsMiddleWare>();
             app.UseMiddleware<TokenClaimsMiddleware>();
             app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+           
  
 
             app.MapControllers();

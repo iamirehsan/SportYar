@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 
 namespace SportYar.Infrastructure.Base
 {
-    public sealed class TokenClaims
+    public sealed class TokenClaims 
     {
         private TokenClaims(string userId)
         {
             UserId = userId;
         }
+
+       
+
         private static TokenClaims _instance;
         public string UserId { get; private set; }
  
@@ -29,6 +32,10 @@ namespace SportYar.Infrastructure.Base
                 return _instance;
             }
             return _instance;
+        }
+        public static void Dispose()
+        {
+            _instance = null;
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿
-
-using SportYar.Domain.Entites;
+﻿using SportYar.Domain.Entites;
 
 namespace SportYar.Repository.Interfaces
 {

@@ -38,6 +38,20 @@ namespace SportYar.Repository.Implimentation
 
         public IProvincesRepository ProvincesRepository => _provincesRepository = _provincesRepository ?? new ProvincesRepository(_context);
 
+        public void Dispose()
+        {
+            _context.Dispose();
+        }
+
+        public async Task CommitAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+        public void Commit()
+        {
+            _context.SaveChanges();
+        }
+
         public async Task SaveAsync()
         {
              await _context.SaveChangesAsync();

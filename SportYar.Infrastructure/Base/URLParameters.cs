@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SportYar.Infrastructure.Base
+﻿namespace SportYar.Infrastructure.Base
 {
     public class URLParameters
     {
@@ -14,8 +8,5 @@ namespace SportYar.Infrastructure.Base
         public string? FilterByPropertyString { get; set; }
         public string? FilterByNameString { get; set; }
         public bool IsDescending { get; set; }
-
-
-
     }
 }

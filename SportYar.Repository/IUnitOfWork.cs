@@ -14,9 +14,8 @@ namespace SportYar.Repository
         public ICitiesRepository CitiesRepository{ get; }
         public IProvincesRepository ProvincesRepository { get; }
         public Task SaveAsync();
-
-
-
-
+        public void Dispose();
+        public Task CommitAsync();
+        public void Commit();
     }
 }

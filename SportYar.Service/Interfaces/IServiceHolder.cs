@@ -4,5 +4,6 @@
     {
         public IStateService StateService { get; }
         public IAnnouncementsService  AnnouncementsService { get; }
+        public IUserFunctionsService UserFunctionsService { get; }
     }
 }

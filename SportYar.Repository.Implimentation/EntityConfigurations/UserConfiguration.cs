@@ -4,12 +4,11 @@ using SportYar.Domain.Entites;
 
 namespace SportYar.Repository.Implimentation.EntityConfigurations
 {
-    internal class RequestsConfigurations : BaseEntityConfiguration<Request>
+    public class UserConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<Request> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.Property(x => x.IsDeleted).HasDefaultValue(false);
-           
         }
     }
 }

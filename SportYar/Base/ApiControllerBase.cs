@@ -15,7 +15,7 @@ namespace SportYar.Base
         protected string AccessToken => GetToken(Request);
 
         protected virtual string UserName => GetClaim(AccessToken, "userName");
-        protected virtual string UserId => GetClaim(AccessToken, "userId");
+        protected virtual Guid UserId => new Guid(GetClaim(AccessToken, "userId"));
 
         protected   URLParameters? Parameters => DeserializeParams();
 

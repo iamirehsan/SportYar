@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SportYar.Infrastructure.Base
+﻿namespace SportYar.Infrastructure.Base
 {
     public sealed class TokenClaims 
     {
@@ -14,12 +7,9 @@ namespace SportYar.Infrastructure.Base
             UserId = userId;
         }
 
-       
-
         private static TokenClaims _instance;
         public string UserId { get; private set; }
  
-
         public static string GetTokenUserId()
         {
             return _instance.UserId;

@@ -15,9 +15,6 @@ namespace SportYar
                 var serviceProvider = scope.ServiceProvider;
                 var databaseContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
                 databaseContext.Database.Migrate();
-
-
-
             }
 
             return host;
@@ -37,9 +34,6 @@ namespace SportYar
                     databaseContext.SeedDataFromExcel<Region>(baseDirectory + "Region.xlsx", ExcelHeaders.RegionHeaders());
 
                 databaseContext.SaveChanges();
-
-
-
             }
 
             return host;

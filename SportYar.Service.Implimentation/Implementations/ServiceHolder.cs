@@ -18,10 +18,13 @@ public class ServiceHolder : IServiceHolder
     private AnnouncementsService _announcementsService;
     private UserFunctionsService _userFunctionsService;
 
-    public ServiceHolder(IUnitOfWork unitOfWork , IMapper mapper)
+    public ServiceHolder(IUnitOfWork unitOfWork , IMapper mapper, IRedisService redisService, IConfiguration configuration, UserManager<User> userManager)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _redisService = redisService;
+        _configuration = configuration;
+        _userManager = userManager;
     }
 
     public IStateService StateService => _stateService = _stateService ?? new StateService(_unitOfWork);

@@ -24,6 +24,7 @@ using Microsoft.Extensions.Hosting;
 using SportYar.Domain.Entites;
 using SportYar.Messages.DTOs;
 using SportYar.Infrastructure.Base;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace SportYar.Base
 {
@@ -49,16 +50,12 @@ namespace SportYar.Base
       
         public static void RegisterAllServices(this IServiceCollection services)
         {
+            services.AddSingleton<IRedisService, RedisService>();
             services.AddScoped<IServiceHolder, ServiceHolder>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-          
-
-
         }
         public static void RegisterAutoMapper(this IServiceCollection services)
         {
-            
-
             // Create the mapping between Announcement and AnnouncementsDTO
             var mapperConfig = new MapperConfiguration(mc =>
             {
@@ -67,10 +64,25 @@ namespace SportYar.Base
 
             // Register the IMapper instance with the dependency injection container
             services.AddSingleton(mapperConfig.CreateMapper());
+        }
+
+        public static void RegisterIdentityService(this IServiceCollection services)
+        {
+            services.AddIdentity<User, IdentityRole>()
+                .AddErrorDescriber<CustomErrorDescriber>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
 
 
+            });
 
         }
+
         public static void RegisterAuthentication(this IServiceCollection services, ConfigurationManager configuration)
         {
             services.AddAuthentication(options =>
@@ -92,7 +104,5 @@ namespace SportYar.Base
                };
            });
         }
-
-
     }
 }

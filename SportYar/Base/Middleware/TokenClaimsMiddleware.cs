@@ -21,15 +21,18 @@ public class TokenClaimsMiddleware  : IDisposable
                                                                       ? context.Request.Headers["Authorization"].ToString().Split(" ")[1]
                                                                       : string.Empty;
 
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var jwtTokenObject = tokenHandler.ReadJwtToken(token);
-        var claims = jwtTokenObject.Claims;
-        var userId = claims.FirstOrDefault(x => x.Type == "userId").ToString();
-        // create singleton object and set properties per request
-        _tokenClaims = TokenClaims.CreateInstance(userId);
+        if (token != String.Empty)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtTokenObject = tokenHandler.ReadJwtToken(token);
+            var claims = jwtTokenObject.Claims;
+            var userId = claims.FirstOrDefault(x => x.Type == "userId").ToString();
+            // create singleton object and set properties per request
+            _tokenClaims = TokenClaims.CreateInstance(userId);
 
-        var serviceProvider = context.RequestServices.GetService<IServiceProvider>();
-        var tokenClaimsSingleton = new ServiceDescriptor(typeof(TokenClaims), _tokenClaims);
+            var serviceProvider = context.RequestServices.GetService<IServiceProvider>();
+            var tokenClaimsSingleton = new ServiceDescriptor(typeof(TokenClaims), _tokenClaims);
+        }
 
         await _next(context);
       

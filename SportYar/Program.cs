@@ -28,9 +28,10 @@ namespace SportYar
             builder.Services.RegisterAllServices();
             builder.Services.RegisterAuthentication(builder.Configuration);
             builder.Services.RegisterAutoMapper();
+            builder.Services.RegisterIdentityService();
 
 
-            var app = builder.Build().SeedDatabase().SeedExcel(builder.Configuration.GetValue<string>("ExcelRoot"));
+            var app = builder.Build().SeedDatabase()/*.SeedExcel(builder.Configuration.GetValue<string>("ExcelRoot"))*/;
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

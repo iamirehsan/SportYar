@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using SportYar.Domain.Entites;
 using SportYar.Domain.Entites.Wallet;
@@ -6,11 +7,12 @@ using SportYar.Repository.Implimentation.EntityConfigurations;
 
 namespace SportYar.Repository.Implimentation
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
+        public DbSet<User> Users { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
